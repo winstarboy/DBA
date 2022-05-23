@@ -1,0 +1,58 @@
+13:52:31 SQL> set timing on
+13:52:47 SQL> select * from emp;
+
+     EMPNO NAME                 JOB                            SAL                   COMISSION DEPARTMENT       
+---------- -------------------- ------------------------------ -------------------- ---------- -----
+         1 Kewin                Developer                      100000                     3000 IT               
+         2 Bovas                Tester                         96000                      2000 IT               
+         3 Daniel               Manager                        8000                       1000 Management       
+         4 Mark                 Manager                        20000                      3000 Management       
+         5 Arthur               HR                             30000                      3000 Human Resou
+         6 Drew                 associate                      60000                      3000 IT               
+
+6 rows selected.
+
+Elapsed: 00:00:00.03
+13:52:57 SQL> select * from emp where job='Manager';
+
+     EMPNO NAME                 JOB                            SAL                   COMISSION DEPARTMENT       
+---------- -------------------- ------------------------------ -------------------- ---------- -----
+         3 Daniel               Manager                        8000                       1000 Management       
+         4 Mark                 Manager                        20000                      3000 Management       
+
+Elapsed: 00:00:00.02
+13:53:55 SQL> select * from emp where job='Manager' and sal>10000;
+
+     EMPNO NAME                 JOB                            SAL                   COMISSION DEPARTMENT       
+---------- -------------------- ------------------------------ -------------------- ---------- -----
+         4 Mark                 Manager                        20000                      3000 Management       
+
+Elapsed: 00:00:00.01
+13:54:51 SQL>  select * from emp where sal>10000  and job='Manager';
+
+     EMPNO NAME                 JOB                            SAL                   COMISSION DEPARTMENT       
+---------- -------------------- ------------------------------ -------------------- ---------- -----
+         4 Mark                 Manager                        20000                      3000 Management       
+
+Elapsed: 00:00:00.01
+13:55:14 SQL> select count(*) rows_query1 from emp where sal>10000;
+
+ROWS_QUERY1
+-----------
+          5
+
+Elapsed: 00:00:00.01
+13:56:17 SQL> select count(*)  rows_query2 from emp job='Manager';
+select count(*)  rows_query2 from emp job='Manager'
+                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+Elapsed: 00:00:00.04
+13:56:41 SQL> select count(*)  rows_query2 from emp  where job='Manager'
+13:56:55   2  ;
+
+ROWS_QUERY2
+-----------
+          2

@@ -1,0 +1,11 @@
+insert into emp2 (dob) values ('06-APR-2002','26-MAR-2000','29-DEC-2001')
+
+insert into emp2 (dob) values (2002-04-06,2000-03-26,2001-07-1999);
+
+INSERT INTO EMP2 (DOB)
+VALUES ('29-DEC-2001');
+
+create view workers as select * from emp0 where job <> 'manager' with CHECK OPTION; 
+
+create or replace view SAVINGS as select emp0.*, round((sysdate - dob)/365) as age from emp0 
+where job <> 'manager' with CHECK OPTION;

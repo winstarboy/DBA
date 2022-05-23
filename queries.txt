@@ -1,0 +1,19 @@
+create table Personnel(EMPNO number ,Bloodgrp varchar(20), 
+height VARCHAR(30), weight varchar(20),mobile_num NUMBER,
+FOREIGN KEY (empno) REFERENCES EMP(empno));
+
+Insert into Personnel Values(1,'B+ve','162','50',1234567890);
+Insert into Personnel Values(2,'A1+ve','150','60',872979799);
+Insert into Personnel Values(3,'B+ve','175','80',2915678902);
+
+Insert into Personnel Values(4,'O+ve','176','90',3234567890);
+Insert into Personnel Values(5,'A1+ve','160','50',9790756260);
+
+
+ALTER TABLE emp
+ADD CONSTRAINT FK_Personnel
+FOREIGN KEY (empno) REFERENCES EMP(empno);
+
+select name,round((sysdate-dob)/365) as age from emp;
+
+select name,round((sysdate-dob)/365) as age from emp where age>46;

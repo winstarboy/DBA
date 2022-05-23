@@ -1,0 +1,7 @@
+CREATE USER test01 IDENTIFIED BY kewin;
+grant create session,resource to test01;
+grant all on emp to test01;
+revoke delete on emp from test01;
+
+Insert into cat01.emp Values(3,'Daniel','Manager',8000,1000,'Management','29-Dec-2001');
+ select * from cat01.emp;

@@ -1,0 +1,3 @@
+create view Workers as select * from emp2 where job <> 'Manager' with CHECK OPTION; 
+select * from Worker;
+ALTER TABLE emp2 DROP  column years;

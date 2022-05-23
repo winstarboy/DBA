@@ -1,0 +1,17 @@
+create sequence seq_empno start with 1 minvalue 1 maxvalue 1000999 nocycle;
+
+select  seq_empno.nextval from dual;
+select  seq_empno.currval from dual;
+select sequence_name from user_sequences;
+select sequence_name from user_sequences;
+
+CREATE TABLE emp
+( 
+empno number(10),
+name varchar(20)
+);
+
+insert into emp values (1,'kewin');
+
+insert into emp values (seq_empno.nextval,'Rishab', 'Developer',100000,3000,'IT','06-Apr-2002');
+insert into emp values (seq_empno.nextval,'Joe','tester',300000,3000,'IT','09-JUN-2002')

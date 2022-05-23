@@ -1,0 +1,18 @@
+create table EMP(EMPNO number,name varchar(20), 
+JOB VARCHAR(30), SAL varchar(20),DOB date);
+
+
+create procedure pr_add_emp (name varchar2, job varchar2, sal number, comission number, department varchar2, dob date ) 
+is begin 
+insert into emp values (seq_employ.nextval,name,job,sal,comission,department, dob);
+end;
+
+execute pr_add_emp('Drew','associate',60000,3000,'IT','20-feb-1999'); 
+
+create sequence seq_employ start with 6 minvalue 6 maxvalue 1000999 nocycle;
+
+drop procedure pr_add_emp
+
+drop sequence seq_employ;
+
+select seq_employ.currval from dual;

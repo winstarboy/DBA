@@ -1,0 +1,8 @@
+TO FIND THE RANGE PARTITION FOR EMPLOYEE TABLE ON SALARY COLUMN\
+
+PARTITIONS:
+create table empart1(id number primary key,name varchar2(40),sal number(10,2)) partition by range(Sal)
+(partition p1 values less than (5000) tablespace users,
+partition p2 values less than (15000) tablespace users);
+
+select tablespace_name from user_tables;

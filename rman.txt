@@ -1,0 +1,31 @@
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "allocate, alter, backup, beginline, blockrecover, catalog, change, connect, copy, convert, create, crosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback, host, {, library, list, mount, open, print, quit, recover, register, release, replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, setlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upgrade, unregister, validate"
+RMAN-01008: the bad identifier was: conn
+RMAN-01007: at line 1 column 1 file: standard input
+
+RMAN> connect cat01
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "auxiliary, catalog, clone, rcvcat, target"
+RMAN-01008: the bad identifier was: cat01
+RMAN-01007: at line 1 column 9 file: standard input
+
+RMAN> mount database
+2> ;
+
+using target database control file instead of recovery catalog
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of alter db command at 05/18/2022 13:59:13
+RMAN-06171: not connected to target database
+
+RMAN>
+
+
+
+
+

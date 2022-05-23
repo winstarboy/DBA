@@ -1,0 +1,143 @@
+TABLESPACE   AND CLUSTERS
+
+Use the CREATE TABLESPACE statement to create a tablespace, 
+which is an allocation of space in the database that can contain schema objects.
+1.
+A permanent tablespace contains persistent schema objects.
+Objects in permanent tablespaces are stored in data files.
+2.
+An undo tablespace is a type of permanent tablespace used by Oracle Database
+to manage undo data if you are running your database in automatic undo management mode. Oracle strongly recommends that you use automatic undo management mode rather than using rollback segments for undo.
+3.
+A temporary tablespace contains schema objects only for the duration of a session.
+Objects in temporary tablespaces are stored in temp files.
+
+When you create a tablespace, it is initially a read/write tablespace. 
+ALTER TABLESPACE statement to 
+i)take the tablespace offline or online, 
+ii)add data files or temp files to it, 
+iii)make it a read-only tablespace.
+REMOVE
+You can also drop a tablespace from the database with the DROP TABLESPACE statement.
+
+CREATION
+CREATE TABLESPACE tbs_kew
+  DATAFILE 'tbs_kewi.dat' 
+    SIZE 20M
+  ONLINE;
+
+CREATE TABLESPACE tbs_perm_02
+  DATAFILE 'tbs_perm_02.dat' 
+    SIZE 10M
+    REUSE
+    AUTOEXTEND ON NEXT 10M MAXSIZE 200M;
+
+SQL> select tablespace_name from user_tablespaces;
+
+TEMPORARY
+
+CREATE TEMPORARY TABLESPACE tbs_temp_01
+  TEMPFILE 'tbs_temp_01.dbf'
+    SIZE 5M
+    AUTOEXTEND ON;
+
+UNDO 
+CREATE UNDO TABLESPACE tbs_undo_01
+  DATAFILE 'tbs_undo_01.dbf'
+    SIZE 5M 
+    AUTOEXTEND ON;
+
+
+MODIFICATIONS
+ALTER 
+
+i) ALTER TABLESPACE tbs_perm_01 OFFLINE NORMAL;
+
+ii) ALTER TABLESPACE tbs_perm_01
+   RENAME DATAFILE 'tbs_perm_01.dat'
+   TO 'tbs_perm_01_new.dat';
+
+iii) ALTER TABLESPACE tbs_perm_01 ONLINE;
+
+
+Add Datafile:
+
+ALTER TABLESPACE tbs_perm_02
+ ADD DATAFILE 'tbs_perm_02.dat'
+   SIZE 20M
+   AUTOEXTEND ON;
+
+Drop Datafile
+ALTER TABLESPACE tbs_perm_03
+DROP DATAFILE 'tbs_perm_03.dat';
+
+READ-ONLY tablespaces
+ 
+ALTER TABLESPACE tbs_perm_01 READ ONLY;
+
+ALTER TABLESPACE tbs_perm_01 READ WRITE;
+
+ADD TEMPFILE also similar
+
+USING TABLESPACE while creating tables
+
+CREATE TABLE <table_name> tablespace <tablespace_name> ( .....  );
+OR 
+CREATE TABLE <table_name>(    ....    ) tablespace <tablespace_name>;
+
+CLUSTERS
+CREATE CLUSTER personnel
+   (department NUMBER(4))
+SIZE 512 STORAGE (initial 100K next 50K) [tablespce <tablespace_name>] ;
+
+Cluster Index for Better Performance
+
+CREATE INDEX idx_personnel ON CLUSTER personnel;
+
+How to use Clusters in Tables 
+
+CREATE TABLE dept_10
+   CLUSTER personnel (department_id)
+   AS SELECT * FROM employees WHERE department_id = 10;
+
+CREATE TABLE dept_20
+   CLUSTER personnel (department_id)
+   AS SELECT * FROM employees WHERE department_id = 20;
+
+SQL> create cluster nest_clust (empno number(6)) size 600 tablespace tbs1;
+
+Cluster created.
+
+
+CREATE CLUSTER emp
+   (empno number)
+SIZE 512 STORAGE (initial 100K next 50K) tablespace tbs_kew
+
+CREATE TABLE employ
+   CLUSTER emp (empno)
+   AS SELECT * FROM emp WHERE empno = 1;
+
+CREATE TABLE empy
+   CLUSTER emp (empno)
+   AS SELECT * FROM emp WHERE empno = 6;
+
+
+create index e_cluster_idx on cluster emp_cluster;
+
+
+//stack notes
+create table customer_name (
+  customer_id number(38),
+  first_name varchar2(20),
+  last_name varchar2(20)
+)
+cluster customer_cluster (customer_id);
+
+create table customer_dob (
+  customer_id number(38),
+  dob date
+)
+cluster customer_cluster (customer_id);
+
+CREATE INDEX idx_emp ON CLUSTER emp;
+

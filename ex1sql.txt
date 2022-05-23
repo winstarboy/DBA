@@ -1,0 +1,17 @@
+create table EMP0(EMPNO NUMBER PRIMARY KEY, NAME varchar(30), 
+JOB varchar(30), SAL NUMBER,
+COMISSION int (10), DEPARTMENT varchar(30), DOB DATE));
+
+Insert into EMP1 Values(1,'Kewin','Developer',100000,3000,'IT','06-Apr-2002');
+Insert into EMP1 Values(2,'Bovas','Tester',96000,2000,'IT','26-Mar-2000');
+Insert into EMP1 Values(3,'Daniel','Manager',8000,1000,'Management','29-Dec-2001');
+
+Insert into EMP1 Values(4,'Mark','Manager',20000,3000,'Management','07-Sep-1970');
+Insert into EMP1 Values(5,'Arthur','HR',30000,3000,'Human Resource','22-Jun-1972');
+
+Alter table EMP1 ADD CONSTRAINT CHK_SAL CHECK(SAL>0 AND SAL>COMISSION);
+Select  constraint_name, constraint_type from user_constraints where table_name='EMP1';
+
+create table EMP1(EMPNO number primary key,name varchar(20), 
+JOB VARCHAR(30), SAL varchar(20),COMISSION NUMBER, 
+DEPARTMENT VARCHAR(30),DOB date);

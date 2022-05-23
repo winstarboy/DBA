@@ -1,0 +1,43 @@
+sequence
+create sequence seq_empno start with 1000 minvalue 100 maxvalue 100000 nocycle;
+select  seq_empno.nextval from dual;
+select  seq_empno.currval from dual;
+select sequence_name from user_sequence;
+
+
+create sequence seq_empno start with 1000 minvalue 100 maxvalue 10000000 no cycle;
+
+
+CREATE TABLE students
+( 
+ID number(10),
+NAME varchar(20)
+);
+
+
+create sequence seq_students start with 1 minvalue 1 maxvalue 10000 nocycle;
+
+insert into students values (1,'klinton');
+
+insert into students values (seq_students.nextval,'Rishab');
+insert into students values (seq_students.currval,'Rishab');
+
+alter table students modify(id number(5) not null);
+
+alter table students add primary key (id);
+
+select * from students;
+
+delete from students where id=9;
+
+select * from user_sequences;
+
+desc students;
+
+select seq_students.nextval from dual;
+select seq_students.currval from dual;
+
+-- dual is a dummy table
+--tab represents tablespace
+
+drop sequence seq_students;
