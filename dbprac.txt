@@ -1,0 +1,79 @@
+create table acc(id number primary key, name varchar2(30), sal number(10)) partition by range(sal)
+(partition p1 values less than(5000) tablespace users, partition p2 values less than(15000) tablespace users);
+
+select * from acc partition (p1);
+
+create table work (id number primary key, sal number(10)) partition by range (sal)
+(partition p1 values less than(5000) tablespace users, partition p2 values less than(15000) tablespace users);
+
+create or replace procedure pr_w(sal number)
+is begin
+insert into work values(seq_acc.nextval,sal);
+end;
+/
+
+select * from emp where to_char(dob,'mon')='apr';
+
+select  * from emp where rtrim(to_char(dob,'day'))='monday' ;
+
+create or replace procedure num2word (n number) is
+word varchar2(20);
+begin
+select decode(n,0,'zero',1,'one',2,'two','non single digit') into word from dual;
+dbms_output.put_line(word);
+end;
+/
+
+create or replace function func_num2word (n number) return varchar is
+word varchar(10);
+begin
+select decode(n,1,'one',2,'two','non')into word from dual;
+return(word);
+end;
+/
+
+select func_num2word(2) from dual;
+
+create or replace procedure word2num_switch (n number)is word varchar(20);
+begin
+select case n
+when 1 then 'one'
+when 2 then 'two'
+else 'non'
+end
+into word from dual;
+dbms_output.put_line(word);
+end;
+/
+
+create or replace function word2num (n number) return varchar is 
+word varchar(20);
+begin
+select case n
+when 1 then 'one'
+when 2 then 'two'
+else 'non'
+end
+into word from dual;
+return (word);
+end;
+/
+
+
+ 
+
+create or replace trigger trig_upd after update on acc for each row
+ begin
+ insert into acc_log values(:old.accno,:old.name,:old.amount,:new.amount,user,sysdate);
+ end;
+ /
+
+begin
+for i in 1.. 1000 loop
+insert into test0 values (tst.nextval,concat('job',i),tst1.nextval);
+end loop;
+end;
+ /
+
+select count(*) rowcount_Q1 from test0 where sal>1566;
+
