@@ -1,0 +1,86 @@
+create table EMP (
+	empno number Primary Key,
+	name varchar(30),
+	Job varchar(30),
+	sal number,
+	comm  number,
+	department varchar(30),
+	age number
+	);
+
+Insert into emp values(1,'Kewin','DEV',100000,3000,'IT',20,'06-APR-2002');
+Insert into emp values(2,'Bovas','Clerk',100000,3000,'Finance',47,'23-OCT-1975');
+Insert into emp values(3,'Mohan','Manager',100000,3000,'HR',50,'12-MAY-1972');
+Insert into emp values(4,'Daniel','DEV',100000,3000,'IT',30,'06-APR-1992');
+
+alter table emp add constraint chk_sal check(sal>0 and sal>comm);
+
+select constraint_name, constraint_type from user_constraints where table_name='EMP';
+
+
+create table Personnel (
+	empno number,
+	bloodgrp varchar(10),
+	height number,
+	weight number,
+	mobno  number
+	);
+	
+alter table personnel add foreign key(EmpNo) references emp(EmpNo);
+
+ALTER TABLE personnel
+MODIFY bloodgrp varchar(10);
+
+//to delete all rows 
+truncate table table_name;
+
+insert into personnel values(1,'B+VE',160,60,7904612159);
+insert into personnel values(2,'B+VE',172,50,8754612159);
+insert into personnel values(3,'B+VE',150,80,79043452159);
+insert into personnel values(4,'A1+VE',166,55,76453829219);
+
+select name,age from emp where age>46;
+
+select name,sal from emp where sal between 30000 and 100003;
+
+
+SELECT emp.name,emp.age
+FROM emp
+INNER JOIN Personnel 
+ON emp.empno = personnel.empno 
+where personnel.bloodgrp='A1+VE';
+
+SELECT empno,MAX(height) groupby empno
+FROM Personnel;
+
+select emp.name from emp INNER join personnel on emp.empno = personnel.empno
+where personnel.height > 170;
+
+select emp.name from emp INNER join personnel on emp.empno = personnel.empno
+where personnel.height > 170;
+
+
+select name,empno from emp
+where height=(select max(height) from Personnel
+where emp.empno=personnel.empno
+group by empno);
+
+
+select name,round((sysdate - dob)/365) 
+age from emp;
+
+Select name, dob from emp
+where trunc(sysdate-dob)/365 > 40;
+
+
+
+
+
+
+
+
+
+
+
+
+

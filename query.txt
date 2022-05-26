@@ -1,0 +1,19 @@
+create table emp (
+emp_id number(10),
+emp_name varchar2(10), 
+salary number(10),
+job varchar2(10) );
+insert into emp values ('001','KEWIN','20000','CLERK');
+insert into emp values ('002','THANIGAI','30000','TESTER');
+insert into emp values ('003','BOVAS','40000','CLERK');
+
+select emp_name,salary from emp
+where salary =(select max(salary) from emp);
+
+select emp_name,job from emp A
+where salary=(select max(salary) from emp B
+where a.job=b.job
+group by job);
+
+
+

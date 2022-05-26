@@ -1,0 +1,16 @@
+create table emp (
+emp_id number(10),
+emp_name varchar2(10),
+salary number(10),
+job varchar2(10) );
+insert into emp values ('001','KEWIN','20000','CLERK');
+insert into emp values ('002','THANIGAI','30000','TESTER');
+insert into emp values ('003','BOVAS','40000','CLERK');
+create view viewemp as
+select emp_id,emp_name,salary,job from emp;
+
+select * from synonyms where synonym_name = 'pubsyemp';
+
+SELECT * FROM USER_SYNONYMS 
+WHERE TABLE_OWNER='Scott'
+AND TABLE_NAME='emp';
